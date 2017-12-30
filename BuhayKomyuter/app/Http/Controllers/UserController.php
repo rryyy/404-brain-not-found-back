@@ -10,7 +10,16 @@ class UserController extends Controller
     //
     public function Login(Request $request)
     {	
-    	$logg = User::username($request->userN)->where('password', $request->password)->get();
+    	$logg = User::username($request->username)->where('password', $request->password)->get();
     	return $logg;
+    }
+    public function Register(Request $request)
+    {
+    	$register = new User;
+    	$register->name = $request->name;
+    	$register->email = $request->email;
+    	$register->password = $request->password;
+    	$register->save();
+    	return response()->json(['status' => '200']);
     }
 }
