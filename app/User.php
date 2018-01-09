@@ -30,4 +30,12 @@ class User extends Authenticatable
     {
         return $query->where('email', $data);
     }
+    public function scopeUserinfo($query,$data)
+    {
+        return $query->where('id', $data);
+    }
+    public function post()
+    {
+        return $this->hasMany('App\Post');
+    }
 }
