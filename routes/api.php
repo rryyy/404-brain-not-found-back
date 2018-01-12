@@ -21,3 +21,4 @@ Route::post('/signup', 'UserController@Register');
 Route::get('/posts', 'PostsController@AllPosts');
 Route::post('/addpost', 'PostsController@AddPost');
 Route::post('/profile', 'UserController@GetAccount');
+Route::get('/analytics', 'PostsController@Analytics');
