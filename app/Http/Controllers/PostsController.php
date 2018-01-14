@@ -46,7 +46,7 @@ class PostsController extends Controller
         $train_responses = Post::all()->where('puv','train')->count();
         $uber_responses = Post::all()->where('puv','uber')->count();
         $grab_responses = Post::all()->where('puv','grab')->count();
-        $tricycle = Post::all()->where('puv','tricycle')->count();
+        $tricycle_responses = Post::all()->where('puv','tricycle')->count();
         //get all good response -> puv
         $bus_good = Post::all()->where('puv','bus')->where('rating','good')->count();
         $jeep_good = Post::all()->where('puv','jeep')->where('rating','good')->count();
@@ -70,9 +70,9 @@ class PostsController extends Controller
             'jeepney_responses' => $jeepney_responses,
             'taxi_responses' => $taxi_responses, 
             'train_responses' => $train_responses, 
-            'uber_responses' => $train_responses,   
-            'grab_responses' => $train_responses,  
-            'tricycle_responses' => $train_responses );
+            'uber_responses' => $uber_responses,   
+            'grab_responses' => $grab_responses,  
+            'tricycle_responses' => $tricycle_responses );
         $good = array(
             'bus' => $bus_good,
             'jeep' => $jeep_good,
