@@ -22,3 +22,6 @@ Route::get('/posts', 'PostsController@AllPosts');
 Route::post('/addpost', 'PostsController@AddPost');
 Route::post('/profile', 'UserController@GetAccount');
 Route::get('/analytics', 'PostsController@Analytics');
+Route::get('/comments', 'CommentsController@GetComments');
+Route::post('/comment', 'CommentsController@GetPostComments');
+Route::post('/addcomment', 'CommentsController@AddComment');

@@ -27,6 +27,7 @@ class PostsController extends Controller
         $addpost->user_id = $request->name;
         $addpost->post_content = $request->content;
         $addpost->feeling = $request->feeling;
+        $addpost->rating = $request->rating;
         $addpost->location = $request->location;
         $addpost->puv = $request->car;
         $addpost->save();
