@@ -92,9 +92,73 @@ class PostsController extends Controller
             'tricycle' => $tricycle_bad
              );
         return response()->json([
-                'bad' => $bad,
+                'negative' => $bad,
                 'positive' => $good,
                 'response' => $responses
+        ]);
+    }
+    public function AnalyticsLocation($location)
+    {
+        //count of all responses
+        $responses = Post::where('location', 'like', '%'.$location.'%')->count();    
+        //count per puv responses
+        $responses_bus = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'bus')->count();
+        $responses_jeep = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'jeep')->count();
+        $responses_taxi = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'taxi')->count();
+        $responses_train = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'train')->count();
+        $responses_uber = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'uber')->count();
+        $responses_grab = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'grab')->count();
+        $responses_tricycle= Post::where('location', 'like', '%'.$location.'%')->where('puv', 'tricycle')->count();
+        //postitive feedbacks
+        $positive_bus = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'bus')->where('rating', 'good')->count();
+        $positive_jeep = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'jeep')->where('rating', 'good')->count();
+        $positive_taxi = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'taxi')->where('rating', 'good')->count();
+        $positive_train = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'train')->where('rating', 'good')->count();
+        $positive_uber = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'uber')->where('rating', 'good')->count();
+        $positive_grab = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'grab')->where('rating', 'good')->count();
+        $positive_tricycle= Post::where('location', 'like', '%'.$location.'%')->where('puv', 'tricycle')->where('rating', 'good')->count();
+        //negative feedbacks
+        $negative_bus = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'bus')->where('rating', 'bad')->count();
+        $negative_jeep = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'jeep')->where('rating', 'bad')->count();
+        $negative_taxi = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'taxi')->where('rating', 'bad')->count();
+        $negative_train = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'train')->where('rating', 'bad')->count();
+        $negative_uber = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'uber')->where('rating', 'bad')->count();
+        $negative_grab = Post::where('location', 'like', '%'.$location.'%')->where('puv', 'grab')->where('rating', 'bad')->count();
+        $negative_tricycle= Post::where('location', 'like', '%'.$location.'%')->where('puv', 'tricycle')->where('rating', 'bad')->count();
+
+        $response = array('response' => $responses);
+        $puv = array(
+            'bus' => $responses_bus,
+            'jeep' => $responses_jeep,
+            'taxi' => $responses_taxi,
+            'train' => $responses_train,
+            'uber' => $responses_uber,
+            'grab' => $responses_grab,
+            'tricycle' => $responses_tricycle
+        );
+        $positive = array(
+            'bus' => $positive_bus,
+            'jeep' => $positive_jeep,
+            'taxi' => $positive_taxi,
+            'train' => $positive_train,
+            'uber' => $positive_uber,
+            'grab' => $positive_grab,
+            'tricycle' => $positive_tricycle
+        );
+        $negative = array(
+            'bus' => $negative_bus,
+            'jeep' => $negative_jeep,
+            'taxi' => $negative_taxi,
+            'train' => $negative_train,
+            'uber' => $negative_uber,
+            'grab' => $negative_grab,
+            'tricycle' => $negative_tricycle
+        );
+        return response()->json([
+                'all response' => $response,
+                'response per puv' => $puv,
+                'positive' => $positive,
+                'negative' => $negative
         ]);
     }
 }
