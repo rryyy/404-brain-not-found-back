@@ -36,7 +36,7 @@ class PostsController extends Controller
         $addpost->rating = $request->rating;
         $addpost->location = $request->location;
         $addpost->puv = $request->car;
-        $addPost->image = $request->image;
+        $addpost->image = $request->image;
         $addpost->save();
 
         //str_contains
