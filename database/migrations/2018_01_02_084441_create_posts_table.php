@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('location');
             $table->string('feeling');
             $table->string('puv');
-            $table->string('image')->nullable();
+            $table->longtext('image')->nullable();
             $table->timestamps();
         });
     }
