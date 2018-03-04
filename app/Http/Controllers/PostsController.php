@@ -23,7 +23,7 @@ class PostsController extends Controller
     }
     public function PostWithin()
     {
-        $search = 'Olongapo';
+        $search = 'Olongapo, Zambales';
         $postwithin = Post::with('user')->latest()->where('location','LIKE',"%{$search}%")->get();
         return $postwithin;
     }
@@ -36,6 +36,7 @@ class PostsController extends Controller
         $addpost->rating = $request->rating;
         $addpost->location = $request->location;
         $addpost->puv = $request->car;
+        $AddPost->image = $request->image;
         $addpost->save();
 
         //str_contains
