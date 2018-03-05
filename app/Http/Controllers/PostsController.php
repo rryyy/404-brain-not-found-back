@@ -23,7 +23,7 @@ class PostsController extends Controller
     }
     public function PostWithin(Request $request)
     {
-        $search = "Olongapo, Zamabales";
+        $search = "Olongapo, Zambales";
         $postwithin = Post::with('user')->latest()->where('location','LIKE',"%{$search}%")->get();
         return $postwithin;
     }
