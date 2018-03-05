@@ -21,11 +21,10 @@ class PostsController extends Controller
         return view('home', compact('post'));
       
     }
-    public function PostWithin()
+    public function NearbyLocation()
     {
-        // $search = "Horseshoe Drive, Olongapo City, Zambales";
-        $postwithin = Post::with('user')->latest()->get();
-        return $postwithin;
+        $post = Post::with('user')->latest()->get();
+        return $post;
     }
     public function AddPost(Request $request)
     {
