@@ -23,8 +23,8 @@ class PostsController extends Controller
     }
     public function PostWithin()
     {
-        $search = "Horseshoe Drive, Olongapo City, Zambales";
-        $postwithin = Post::with('user')->latest()->where('location', $search)->get();
+        // $search = "Horseshoe Drive, Olongapo City, Zambales";
+        $postwithin = Post::with('user')->latest()->get();
         return $postwithin;
     }
     public function AddPost(Request $request)
