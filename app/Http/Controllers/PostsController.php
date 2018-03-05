@@ -168,4 +168,28 @@ class PostsController extends Controller
                 'negative' => $negative
         ]);
     }
+
+    public function index()
+    {
+        $posts = Post::with('user')->latest('created_at')->get();
+
+        return view('posts.index', compact('posts'));
+    }
+
+    public function create()
+    {
+        return view('posts.create');
+    }
+
+    public function store(Request $request)
+    {
+        Post::create([
+            'user_id' => auth()->user()->id,
+            'post_content' => $request->post_content,
+            'feeling' => $request->feeling,
+            'puv' => $request->puv,
+        ]);
+
+        return redirect(route('post.index'))->with('success', 'Post published!');
+    }
 }

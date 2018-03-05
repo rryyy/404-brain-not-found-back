@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     //
     public function Login(Request $request)
     {	
-    	$logg = User::username($request->username)->where('password', $request->password)->get();
-    	return $logg;
+        $logg = User::username($request->username)->first();
+
+        if(Hash::check($request->password, $logg->password)){
+            
+            return $logg;
+        }
+        return [];
     }
     public function Register(Request $request)
     {
@@ -20,7 +26,7 @@ class UserController extends Controller
         $register->contact = $request->contact;
         $register->address = $request->location;
     	$register->email = $request->email;
-    	$register->password = $request->password;
+    	$register->password = bcrypt($request->password);
     	$register->save();
     	return response()->json(['status' => '200','last_insert_id' => $register->id]);
         // return Response::json(array('success' => true, 'last_insert_id' => $data->id), 200);
