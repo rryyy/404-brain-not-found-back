@@ -21,9 +21,9 @@ class PostsController extends Controller
         return view('home', compact('post'));
       
     }
-    public function PostWithin()
+    public function PostWithin(Request $request)
     {
-        $search = "Olongapo City";
+        $search = $request->location;
         $postwithin = Post::with('user')->latest()->where('location', 'LIKE','%'.$search.'%')->get();
         return $postwithin;
     }
