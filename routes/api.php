@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/signin', 'UserController@Login');
 Route::post('/signup', 'UserController@Register');
 Route::get('/posts', 'PostsController@AllPosts');
-Route::get('/nearby', 'PostsController@NearbyLocation');
+Route::get('/postwithin', 'PostsController@PostWithin');
 Route::post('/addpost', 'PostsController@AddPost');
 Route::post('/profile', 'UserController@GetAccount');
 Route::get('/comments', 'CommentsController@GetComments');
