@@ -171,7 +171,7 @@ class PostsController extends Controller
 
     public function index()
     {
-        $posts = Post::with('user')->latest('created_at')->get();
+        $posts = Post::with('user')->latest('created_at')->paginate(5);
 
         return view('posts.index', compact('posts'));
     }
@@ -191,5 +191,12 @@ class PostsController extends Controller
         ]);
 
         return redirect(route('post.index'))->with('success', 'Post published!');
+    }
+
+    public function update(Post $post, Request $request)
+    {
+        $post->update($request->all());
+
+        return redirect(route('post.index'))->with('success', "Post has been updated to {$post->rating}.");
     }
 }
