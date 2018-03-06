@@ -13,7 +13,15 @@
             {{--  <a href="{{ route('post.create') }}" class="btn btn-primary">Add Post</a>  --}}
             @foreach($posts as $post)
                 <div class="panel {{ isset($post->rating) ? $post->rating == "positive" ? 'panel-success' : 'panel-danger' :'panel-default'}}">
-                    <div class="panel-heading">Posted by : {{ $post->user->name }}</div>
+                    <div class="panel-heading">
+                        Posted by : {{ $post->user->name }}
+                   
+                        <button type="submit" form="postDelete-{{ $post->post_id }}" class="btn btn-link pull-right">Delete</button>
+                        <form action="{{ route('post.destroy', [$post->post_id])}}" method="POST" id="postDelete-{{ $post->post_id }}">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                        </form>
+                    </div>
 
                     <div class="panel-body">
                         {{ str_limit($post->post_content, 100) }}...
