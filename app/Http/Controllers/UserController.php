@@ -11,7 +11,7 @@ class UserController extends Controller
     //
     public function Login(Request $request)
     {	
-        $logg = User::username($request->username)->first();
+        $logg = User::where('username', $request->username)->first();
 
         if(Hash::check($request->password, $logg->password)){
             
